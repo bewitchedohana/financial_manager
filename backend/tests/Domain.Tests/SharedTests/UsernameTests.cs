@@ -1,12 +1,9 @@
-using System.Runtime.InteropServices;
 using Domain.Shared;
 
 namespace Domain.Tests.SharedTests;
 
 public sealed class UsernameTests
 {
-    private readonly Faker _faker = new("pt_BR");
-
     [Theory]
     [InlineData("someuser")]
     [InlineData("awesomeuser")]

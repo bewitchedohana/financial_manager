@@ -1,4 +1,3 @@
-using Bogus;
 using Domain.Shared;
 
 namespace Domain.Tests.SharedTests;
