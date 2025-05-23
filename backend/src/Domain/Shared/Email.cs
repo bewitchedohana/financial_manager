@@ -17,6 +17,7 @@ public class Email
             try
             {
                 _ = new MailAddress(trimmed);
+                _value = trimmed;
             }
             catch
             {
