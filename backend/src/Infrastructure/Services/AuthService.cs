@@ -60,4 +60,21 @@ public sealed class AuthService : IAuthService
 
         return Result.Success(tokenString);
     }
+
+    public async Task<Result<User>> Login(string email, string password)
+    {
+        User? user = await _userManager.FindByEmailAsync(email);
+        if (user is null)
+        {
+            return Result.Failure<User>("Wrong email or password");
+        }
+
+        bool result = await _userManager.CheckPasswordAsync(user, password);
+        if (!result)
+        {
+            return Result.Failure<User>("Wrong email or password");
+        }
+
+        return Result.Success(user);
+    }
 }
