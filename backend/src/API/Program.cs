@@ -11,7 +11,7 @@ public class Program
 
         // Add services to the container.
         builder.Services.InjectPersistenceDependencies(builder.Configuration)
-            .InjectInfrastructureDependencies();
+            .InjectInfrastructureDependencies(builder.Configuration);
 
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
