@@ -1,5 +1,6 @@
 using Persistence.IoC;
 using Infrastructure.IoC;
+using API.IoC;
 
 namespace API;
 
@@ -11,7 +12,8 @@ public class Program
 
         // Add services to the container.
         builder.Services.InjectPersistenceDependencies(builder.Configuration)
-            .InjectInfrastructureDependencies(builder.Configuration);
+            .InjectInfrastructureDependencies(builder.Configuration)
+            .InjectAPIDependencies();
 
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -27,8 +29,8 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        app.UseCors("AllowOrigin");
         app.UseAuthorization();
-
 
         app.MapControllers();
 
