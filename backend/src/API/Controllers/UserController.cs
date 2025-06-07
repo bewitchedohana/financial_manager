@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/user")]
 public sealed class UserController(IUserService userService) : ControllerBase
 {
     private readonly IUserService _userService = userService;
