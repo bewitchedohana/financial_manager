@@ -4,7 +4,7 @@ using Application.Authentication;
 
 namespace API.Controllers;
 
-[Route("api/Auth")]
+[Route("api/auth")]
 [ApiController]
 public class AuthControler(
     IAuthService authService
