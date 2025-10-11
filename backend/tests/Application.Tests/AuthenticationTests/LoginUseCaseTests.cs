@@ -62,6 +62,10 @@ public sealed class LoginUseCaseTests
         _authServiceMock.Setup(_ => _.Login(request.Email, request.Password))
             .ReturnsAsync(Result.Success(new User()));
 
+        _authServiceMock
+            .Setup(_ => _.GenerateAuthenticationToken(It.IsAny<User>()))
+            .ReturnsAsync(Result.Success(Guid.NewGuid().ToString()));
+
         // Act
         Result<string> response = await _sut.Execute(request);
 
