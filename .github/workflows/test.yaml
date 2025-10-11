@@ -1,0 +1,43 @@
+name: Test
+on:
+    workflow_run: 
+        workflows: [Build]
+        types: [completed]
+
+jobs:
+    test-backend:
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        name: Test backend
+        defaults:
+          run:
+            working-directory: backend
+        steps:
+            - name: Checkout backend
+              uses: actions/checkout@v5
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v4
+              with:
+                dotnet-version: 9.0.300
+            - name: Run backend tests
+              run: dotnet test src/API
+    
+    test-frontend:
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        name: Test frontend
+        defaults:
+          run:
+            working-directory: frontend
+        
+        steps:
+            - uses: actions/checkout@v5
+              name: Checkout frontend
+            - uses: actions/setup-node@v4
+              name: Setup node
+              with:
+                node-version: '20.x'
+            - name: Test frontend
+              run: |
+                npm install
+                npm run test
